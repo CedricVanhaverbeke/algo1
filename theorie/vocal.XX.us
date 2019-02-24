@@ -1,0 +1,10 @@
+;zonebestand vocal.XX.us
+$TTL 60
+@			IN	SOA	gershwin.vocal.XX.us. root (
+			454878
+			60
+			60
+			60
+			60)
+			IN	NS	gershwin
+gershwin	IN	A	192.168.16.132
