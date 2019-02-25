@@ -1,0 +1,2 @@
+# Don't track folders with these names
+.vscode/

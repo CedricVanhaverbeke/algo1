@@ -211,3 +211,5 @@ Lijst();
 template <class T>
 Lijst<T>::Lijst() : Lijstknoopptr<T>(){};
 ```
+
+## Stap 7: Er zit een fout in de maak methode. Ik weet niet goed waarom, uitzoeken met Demian

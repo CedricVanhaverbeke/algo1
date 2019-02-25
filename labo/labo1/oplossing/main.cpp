@@ -41,6 +41,7 @@ int main() {
         // move operator implementeren voor deze lijn, want in maak wordt de
         // gebruikt. Hij gebruikt de standaard move operator om l in te stellen
         // denk ik
+
         l = maak();
 
         std::cout << l << endl;
@@ -50,7 +51,6 @@ int main() {
         // l.verwijder(45);
         // verwijderd++;
 
-        /*
         // Eerste 45 wordt verwijderd
         std::cout << l << endl;
         l.verwijder(123);
@@ -118,8 +118,7 @@ int main() {
         Lijstknoop<int>::controle(gemaakt, verwijderd);
         l2.schrijf(cerr);
         cerr << "\n";
-        */
-    };
+        };
 
     // verwijderd += 19;
     // Lijstknoop<int>::controle(gemaakt, verwijderd);
