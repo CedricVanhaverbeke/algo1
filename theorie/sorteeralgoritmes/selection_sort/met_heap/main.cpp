@@ -2,22 +2,9 @@
 #include "stijgendeHeap.cpp"
 
 int main() {
-    Heap<int> heap;
-    cout << heap << endl;
-    cout << "Element toevoegen aan de heap" << endl;
-
-    heap.voegToe(5);
-    heap.voegToe(10);
-    heap.voegToe(3);
-    heap.voegToe(7);
-    heap.voegToe(8);
-    heap.voegToe(9);
-    heap.voegToe(69);
-    heap.voegToe(73);
-    heap.voegToe(54);
-    heap.voegToe(29);
-
-    
+    vector<int> v = {5, 10, 3, 7, 8, 9, 69, 73, 54, 29};
+    Heap heap(v);
 
     cout << heap << endl;
+    return 0;
 }
