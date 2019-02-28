@@ -20,13 +20,11 @@ Dit ziet er zo uit:
 // Move operator in de header
 Lijst& operator=(Lijstknoopptr<T>&&);
 
-// Bij de implementatie
+// Dit voert gewoon de move operator uit van een lijstknoopptr op other.
+move(other) slaat erop dat hij het adres moet moven, en niet kopïeren.
 Lijstknoopptr<T>::operator=(move(other));
 return *this;
 ```
-
-TODO: uitleg van tweede lijn. Ik denk dat je de move operator gebruikt van
-de lijstknoop op die manier die al bestaat.
 
 ## Stap 2
 
@@ -256,4 +254,21 @@ In essentie gebruiken we de move constructor van een Lijstknoopptr, wat eigenlij
 ```cpp
 template <class T>
 Lijst<T>::Lijst(Lijst<T>&& other) : Lijstknoopptr<T>(move(other)) {}
+```
+
+## Stap 8: Lege lijsten toekennen
+
+Nu is er nog een probleem met volgende lijn code:
+
+```cpp
+l = l2;
+```
+
+In l2 zit een lege lijst en daar kan onze assignment operator nog niet mee overweg.
+Daarom schrijven we: als het wel over een lege lijst gaat:
+
+```cpp
+} else {
+    (*this) = nullptr;
+}
 ```

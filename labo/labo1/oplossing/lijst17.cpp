@@ -38,7 +38,12 @@ Lijst<T>& Lijst<T>::operator=(const Lijst<T>& other) {
     if (other.get() != nullptr) {
         auto tmp = std::make_unique<Lijstknoop<T>>(other->sleutel);
         (*this) = std::move(tmp);
+
+        // Deze lijn kopieert alles wat erna komt.
+        // Dus NIET DE REFERENTIE
         this->get()->volgend = other->volgend;
+    } else {
+        (*this) = nullptr;
     }
 
     return *this;
@@ -68,7 +73,7 @@ void Lijst<T>::schrijf(ostream& os) const {
 template <class T>
 Lijst<T>::Lijst() : Lijstknoopptr<T>(){};
 
-// Move operator overloaden
+// Move operator met een lijstknoopptr als argument
 template <class T>
 Lijst<T>& Lijst<T>::operator=(Lijstknoopptr<T>&& other) {
     // Not sure wat deze lijn doet

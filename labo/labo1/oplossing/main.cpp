@@ -7,6 +7,7 @@
 #include "lijstknoop.cpp"
 
 using std::cerr;
+using std::cout;
 using std::string;
 int gemaakt = 0;  // aantallen gemaakte en verwijderde knopen.
 int verwijderd = 0;
@@ -35,54 +36,26 @@ Lijst<int> maak() {
 int main() {
     {
         cerr << "maak met transfer\n";
-
-        // default constructor implementeren voor deze lijn
         Lijst<int> l;
-        Lijstknoop<int>::controle(gemaakt, verwijderd);
-
-        // move operator implementeren voor deze lijn, want in maak wordt de
-        // gebruikt. Hij gebruikt de standaard move operator om l in te stellen
-        // denk ik
-
         l = maak();
-        Lijstknoop<int>::controle(gemaakt, verwijderd);
-
-        std::cout << l << endl;
-
         Lijstknoop<int>::controle(gemaakt, verwijderd);
         cerr << "verwijderen\n";
         l.verwijder(45);
         verwijderd++;
-
-        // Eerste 45 wordt verwijderd
-        std::cout << l << endl;
         l.verwijder(123);
-
-        // 123 zit er niet in dus wordt niet verwijderd
-        std::cout << l << endl;
-
         Lijstknoop<int>::controle(gemaakt, verwijderd);
-
-        for (auto s : l) cerr << s << "\n";
-        l.schrijf(cerr);
-
-        // Wat maakt die losse oproep van maak nog uit?
+        //    for (auto s:l)
+        //        cerr<<s<<"\n";
+        //    l.schrijf(cerr);
         cerr << "Losse oproep maak\n";
         maak();
         verwijderd += 8;
         Lijstknoop<int>::controle(gemaakt, verwijderd);
         cerr << "maak() in constructor\n";
-
-        std::cout << l << endl;
-
         Lijst<int> l2(maak());
-
         Lijstknoop<int>::controle(gemaakt, verwijderd);
-
         cerr << "duplicaat 1\n";
-
         l2 = l;
-
         if (!l2.isClone(l)) throw("copy levert andere lijst op.");
         verwijderd += 8;
         gemaakt += 7;
@@ -120,10 +93,17 @@ int main() {
         swap(l2, l);
         Lijstknoop<int>::controle(gemaakt, verwijderd);
         l2.schrijf(cerr);
-        cerr << "\n";
+        cerr << "\nl=move(l2);\n";
+        l = move(l2);
+        verwijderd += 7;
+        Lijstknoop<int>::controle(gemaakt, verwijderd);
+        cerr << "l=l2;\n";
+        l = l2;
+        verwijderd += 5;
+        Lijstknoop<int>::controle(gemaakt, verwijderd);
     };
-
-    verwijderd += 19;
+    verwijderd += 7;
     Lijstknoop<int>::controle(gemaakt, verwijderd);
+    cout << "Einde testprogramma. Controles hebben geen fouten gevonden.\n";
     return 0;
 }
