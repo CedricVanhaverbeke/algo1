@@ -14,14 +14,6 @@ ostream& operator<<(ostream& os, const Lijst<T>& l);
 template <class T>
 class Lijst : private Lijstknoopptr<T> {
    public:
-    // toekenning, constructoren
-    // overname constructoren van unique_ptr
-
-    // te doen....
-
-    // operaties
-    // duplicaten zijn toegelaten.
-
     // Copy constructor
     Lijst(const Lijst&);
 
@@ -62,7 +54,8 @@ class Lijst : private Lijstknoopptr<T> {
     bool isClone(const Lijst<T>&) const;
 
     // uitschrijven: voor elke knoop de T-waarde, gescheiden door komma's
-    friend ostream& operator<<<>(ostream& os, const Lijst& l);
+    // Als je ook de >> operator wil implementeren kan je operator<<>> schrijven
+    friend ostream& operator<<(ostream& os, const Lijst& l);
 
    public:
     void schrijf(ostream& os) const;
