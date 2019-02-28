@@ -28,8 +28,14 @@ class Lijst : private Lijstknoopptr<T> {
     // assignment operator
     Lijst& operator=(const Lijst&);
 
-    // Move operator
+    // Move operator met een lijstknoopptr
     Lijst& operator=(Lijstknoopptr<T>&&);
+
+    // Move operator met een lijst
+    Lijst& operator=(Lijst&&);
+
+    // Move constructor
+    Lijst(Lijst&&);
 
     // Default constructor
     Lijst();

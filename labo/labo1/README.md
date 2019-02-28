@@ -212,4 +212,48 @@ template <class T>
 Lijst<T>::Lijst() : Lijstknoopptr<T>(){};
 ```
 
-## Stap 7: Er zit een fout in de maak methode. Ik weet niet goed waarom, uitzoeken met Demian
+## Stap 7: Move operator met een lijst in
+
+```
+maak met transfer
+Fout bij controle:
+Aantal gemaakte knopen   : 16 (moet zijn: 8)
+Aantal verwijderde knopen: 8 (moet zijn: 0)
+libc++abi.dylib: terminating with uncaught exception of type char const*
+```
+
+Uitleg van de assistent: Ik heb enkel een move operator geschreven voor een Lijst met als argument een lijstknoopptr.
+Daarom gebruikt mijn code de copy constructor van Lijst en wordt er gewoon een extra lijst gemaakt en direct weggegooid
+
+In de headerfile:
+
+```cpp
+// Move operator met een lijst
+Lijst& operator=(Lijst&&);
+
+// Move constructor
+Lijst(Lijst&&);
+```
+
+#### Implementatie move operator
+
+Cnops zei dat je even goed een move operator kan implementeren met een swap, maar da's niet zo'n goede code.
+In essentie willen we gewoon de move operator van de unique_pointer<T> gebruiken, of dus van een lijstknoopptr, want da's zijn alias
+
+```cpp
+// Move operator met een lijst
+template <class T>
+Lijst<T>& Lijst<T>::operator=(Lijst<T>&& other) {
+    Lijstknoopptr<T>::operator=(move(other));
+    return *this;
+}
+```
+
+#### Implementatie move constructor
+
+In essentie gebruiken we de move constructor van een Lijstknoopptr, wat eigenlijk gewoon een unique_pointer is.
+
+```cpp
+template <class T>
+Lijst<T>::Lijst(Lijst<T>&& other) : Lijstknoopptr<T>(move(other)) {}
+```

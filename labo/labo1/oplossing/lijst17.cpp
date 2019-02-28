@@ -12,6 +12,17 @@ Lijst<T>::Lijst(const Lijst<T>& other) {
     this->get()->volgend = other->volgend;
 }
 
+// Move constructor met een lijst
+template <class T>
+Lijst<T>::Lijst(Lijst<T>&& other) : Lijstknoopptr<T>(move(other)) {}
+
+// Move operator met een lijst
+template <class T>
+Lijst<T>& Lijst<T>::operator=(Lijst<T>&& other) {
+    Lijstknoopptr<T>::operator=(move(other));
+    return *this;
+}
+
 // assignment operator
 // In this zit nu het linkerlid
 template <class T>

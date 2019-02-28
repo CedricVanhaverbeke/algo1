@@ -10,6 +10,7 @@ using std::cerr;
 using std::string;
 int gemaakt = 0;  // aantallen gemaakte en verwijderde knopen.
 int verwijderd = 0;
+
 // Wat volgt is een toepassing;
 // deze wordt normaal door de gebruiker geschreven.
 // class Lijstknoop:public string{
@@ -37,19 +38,21 @@ int main() {
 
         // default constructor implementeren voor deze lijn
         Lijst<int> l;
+        Lijstknoop<int>::controle(gemaakt, verwijderd);
 
         // move operator implementeren voor deze lijn, want in maak wordt de
         // gebruikt. Hij gebruikt de standaard move operator om l in te stellen
         // denk ik
 
         l = maak();
+        Lijstknoop<int>::controle(gemaakt, verwijderd);
 
         std::cout << l << endl;
 
         Lijstknoop<int>::controle(gemaakt, verwijderd);
-        // cerr << "verwijderen\n";
-        // l.verwijder(45);
-        // verwijderd++;
+        cerr << "verwijderen\n";
+        l.verwijder(45);
+        verwijderd++;
 
         // Eerste 45 wordt verwijderd
         std::cout << l << endl;
@@ -118,9 +121,9 @@ int main() {
         Lijstknoop<int>::controle(gemaakt, verwijderd);
         l2.schrijf(cerr);
         cerr << "\n";
-        };
+    };
 
-    // verwijderd += 19;
-    // Lijstknoop<int>::controle(gemaakt, verwijderd);
+    verwijderd += 19;
+    Lijstknoop<int>::controle(gemaakt, verwijderd);
     return 0;
 }
