@@ -76,8 +76,8 @@ clang: error: linker command failed with exit code 1 (use -v to see invocation)
 The terminal process terminated with exit code: 1
 ```
 
-We moeten de iterator implementeren. De iterator is echter bv van het type iterator<int>. Daarom zijn we genoodzaakt
-om een iterator te implementeren die nog een extra veld heeft, de huidige knoop waar hij mee bezig is, zodat we naar de volgende kunne
+We moeten de iterator implementeren. De iterator is echter bv van het type Lijstknoop. Daarom zijn we genoodzaakt
+om een iterator te implementeren die nog een extra veld heeft, de huidige knoop waar hij mee bezig is, zodat we naar de volgende kunnen
 
 ```c++
 iterator(Lijstknoop<T>* l = 0) : huidig(l) {}

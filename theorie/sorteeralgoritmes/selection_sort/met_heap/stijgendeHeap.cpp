@@ -24,6 +24,52 @@ class Heap {
         sorteer_stijgende_heap();
     }
 
+    void vervangWortelelement(T nieuw) {
+        if (nieuw > this->vector[0]) {
+            this->vector[0] = move(nieuw);
+        } else {
+            // nieuw element is kleiner, dus het kan de heapvolgorde verstoren
+            int volgnr = 0;
+
+            // We gaan kijken of de kinderen een groter element bevatten.
+            // Zolang dat zo is gaan we het grootste element naar boven swappen
+            // Met zijn ouder
+            while (kinderenBevattenGroterElement(volgnr, nieuw)) {
+                std::vector<T> kinderen = getKinderen(volgnr);
+                T grootste = kinderen[0];
+                volgnr = 2 * volgnr + 1;
+                if (kinderen.size() == 2) {
+                    if (grootste < kinderen[1]) {
+                        // Want volgnr is al veranderd
+                        volgnr = volgnr + 1;
+                        grootste = kinderen[1];
+                    }
+                }
+                std::swap(this->vector[getVolgNrOuder(volgnr)],
+                          this->vector[volgnr]);
+            }
+
+            // Wanneer de lus afgelopen is kennen we de plaats van het nieuw
+            // element
+            std::swap(this->vector[volgnr], nieuw);
+        }
+    }
+
+    bool isEmpty() { return (vector.size() == 0); }
+
+    T verwijderGrootsteElement() {
+        T wortel = vector[0];
+
+        // Nu gaan we het laatste element verwijderen
+        // Eerst opslaan
+        T laatsteElement = vector[vector.size() - 1];
+        vector.pop_back();
+
+        vervangWortelelement(laatsteElement);
+
+        return wortel;
+    }
+
    private:
     friend ostream& operator<<(ostream& os, Heap<T>& heap) {
         os << "Print vector:" << endl;
@@ -83,6 +129,38 @@ class Heap {
 
             volgnr = this->getVolgNrOuder(volgnr);
         }
+    }
+
+    // returnt de array van kinderen van een bepaald volgnr
+    // Enkel toevoegen aan de kinderen als de size van de array
+    // niet overschreden wordt
+    vector<T> getKinderen(int volgnr) {
+        // De locatie van de kinderen staat in de cursus!
+        std::vector<T> kinderen;
+        if (2 * volgnr + 1 < this->vector.size()) {
+            kinderen.push_back(this->vector[2 * volgnr + 1]);
+        }
+        if (2 * volgnr + 2 < this->vector.size()) {
+            kinderen.push_back(this->vector[2 * volgnr + 2]);
+        }
+        return kinderen;
+    }
+
+    bool kinderenBevattenGroterElement(int volgnr, T nieuw) {
+        // Haal kinderen op
+        std::vector<T> kinderen = getKinderen(volgnr);
+
+        // Sowieso false als hij geen kinderen meer heeft
+        if (kinderen.size() == 0) {
+            return false;
+        }
+        T grootste = kinderen[0];
+        if (kinderen.size() == 2) {
+            if (grootste < kinderen[1]) {
+                grootste = kinderen[1];
+            }
+        }
+        return (nieuw < grootste);
     }
 
     vector<T> vector;

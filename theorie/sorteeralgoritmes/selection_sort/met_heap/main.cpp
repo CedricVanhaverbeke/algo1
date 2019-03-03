@@ -1,10 +1,29 @@
 #include <iostream>
 #include "stijgendeHeap.cpp"
 
+template <class T>
+void selection_sort_met_heap(vector<T> &vector) {
+    // Maken van de heap adhv de vector
+    Heap heap(vector);
+    int i = 0;
+    while (!heap.isEmpty()) {
+        vector[vector.size() - i - 1] = heap.verwijderGrootsteElement();
+        i++;
+    }
+}
+
+template <class T>
+void print_vector(vector<T> &vector) {
+    for (auto t : vector) {
+        cout << t << " ";
+    }
+    cout << endl;
+}
+
 int main() {
     vector<int> v = {5, 10, 3, 7, 8, 9, 69, 73, 54, 29};
-    Heap heap(v);
-
-    cout << heap << endl;
+    print_vector(v);
+    selection_sort_met_heap(v);
+    print_vector(v);
     return 0;
 }

@@ -44,9 +44,12 @@ int main() {
         verwijderd++;
         l.verwijder(123);
         Lijstknoop<int>::controle(gemaakt, verwijderd);
-        //    for (auto s:l)
-        //        cerr<<s<<"\n";
-        //    l.schrijf(cerr);
+
+        for (auto s : l) cerr << s << "\n";
+        l.schrijf(cerr);
+
+        cout << endl;
+
         cerr << "Losse oproep maak\n";
         maak();
         verwijderd += 8;

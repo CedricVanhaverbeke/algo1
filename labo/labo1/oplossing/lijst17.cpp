@@ -32,15 +32,13 @@ Lijst<T>& Lijst<T>::operator=(const Lijst<T>& other) {
         return *this;
     }
 
-    // We gaan enkel de eerste knoop kopiëren
-    // Zodat het begin van de lijst wel verschillend
-    // is maar de rest niet
     if (other.get() != nullptr) {
+        // Eerste knoop handmatig kopïeren
         auto tmp = std::make_unique<Lijstknoop<T>>(other->sleutel);
         (*this) = std::move(tmp);
 
         // Deze lijn kopieert alles wat erna komt.
-        // Dus NIET DE REFERENTIE
+        // Je gebruikt impliciet de operator die je nu aan het schrijven bent :p
         this->get()->volgend = other->volgend;
     } else {
         (*this) = nullptr;

@@ -89,7 +89,7 @@ class Lijst : private Lijstknoopptr<T> {
     Lijst<T>* zoekGesorteerd(const T& sleutel);
 };
 
-// Kijken of de waarden in de iteratoren gelijk zijn of niet
+// Niet de waaren vergelijken, wel de lijstknopen zelf
 template <class T>
 bool Lijst<T>::iterator::operator!=(const iterator& other) {
     return (this->huidig != other.huidig);
