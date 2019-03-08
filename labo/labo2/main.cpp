@@ -37,5 +37,13 @@ int main() {
     cout << endl;
     insertionSort.meet(10, 10000, cout);
 
+    // Mergesort testen
+    Sortvector<int> vector4{6};
+    vector4.vul_omgekeerd();
+
+    MergeSort<int> mergeSort;
+    mergeSort(vector4);
+    cout << vector4;
+
     return 0;
 }

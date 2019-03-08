@@ -126,9 +126,69 @@ class MergeSort : public Sorteermethode<T> {
    public:
     void operator()(
         vector<T>& v) const;  // const want MergeSort object verandert niet
+
+   private:
+    void mergesort(vector<T>& v, int l, int r, vector<T>& hulp) const;
+    void merge(vector<T>& v, int l, int m, int r, vector<T>& hulp) const;
 };
 
 template <typename T>
-void MergeSort<T>::operator()(vector<T>& v) const {}
+void MergeSort<T>::operator()(vector<T>& v) const {
+    vector<T> hulp(v.size() / 2);  // Hulpvector heeft maximum v / 2 plaatsen
+    mergesort(v, 0, v.size(), hulp);
+}
+
+template <typename T>
+void MergeSort<T>::mergesort(vector<T>& v, int l, int r,
+                             vector<T>& hulp) const {
+    // Enkel doen als de array groter is dan 1
+    // Dus als l links zit van r gaan we splitsen
+    if (l < r - 1) {
+        // Midden is gelijk aan de lengte (r -l) plus de locatie van l
+        int m = l + ((r - l) / 2);
+
+        // Splits links deel op
+        mergesort(v, l, m, hulp);
+
+        // Splits rechts deel op
+        mergesort(v, m, r, hulp);
+
+        // Voeg de delen samen
+        merge(v, l, m, r, hulp);
+    }
+}
+
+template <typename T>
+void MergeSort<T>::merge(vector<T>& v, int l, int m, int r,
+                         vector<T>& hulp) const {
+    int k = 0, i = l, j = m, kleinste_index;
+    while (i < m && j < r) {
+        if (v[j] < v[i]) {
+            kleinste_index = j;
+            j++;
+        } else {
+            kleinste_index = i;
+            i++;
+        }
+        hulp[k] = move(v[kleinste_index]);
+        k++;
+    }
+
+    while (i < m) {
+        hulp[k] = move(v[i]);
+        k++;
+        i++;
+    }
+
+    while (j < r) {
+        hulp[k] = move(v[j]);
+        k++;
+        j++;
+    }
+
+    for (int i = 0; i < k; i++) {
+        v[l + i] = move(hulp[i]);
+    }
+}
 
 #endif
