@@ -14,19 +14,22 @@ void print_vector(vector<T> &vector) {
     HOE WERKT HET MERGEN?
     we houden 3 tellertjes bij
     k: is er louter om de index te bepalen van de hulparray
-    h(ulp)l: gaan we instellen op l zodat we de originele waarde van l nog kennen
-    h(ulp)m: gaan we instellen op m zodat we de originele waarde van m nog kennen
+    h(ulp)l: gaan we instellen op l zodat we de originele waarde van l nog
+   kennen h(ulp)m: gaan we instellen op m zodat we de originele waarde van m nog
+   kennen
 
     We doen zolang 1 van de 2 subarrays doorlopen is:
-        - check welk element het kleinste van de eerste 2 niet gekozen elementen uit beide subarrays
+        - check welk element het kleinste van de eerste 2 niet gekozen elementen
+   uit beide subarrays
         - plaats dit element op plaats k in de hulparray.
         - verhoog de juiste tellers, en zeker ook k
-    
-    Wanneer 1 van de 2 subarrays doorlopen is kan het zijn dat de andere nog niet volledig leeg is.
-    Dus we gaan ze volledig leeg maken met 2 simpele while loops
 
-    Daarna doorlopen we de hulparray en plaatsen we de elementen (op de juiste plaats) terug
-    in de originele array
+    Wanneer 1 van de 2 subarrays doorlopen is kan het zijn dat de andere nog
+   niet volledig leeg is. Dus we gaan ze volledig leeg maken met 2 simpele while
+   loops
+
+    Daarna doorlopen we de hulparray en plaatsen we de elementen (op de juiste
+   plaats) terug in de originele array
 
 */
 
@@ -36,33 +39,33 @@ void merge(vector<T> &vector, int l, int m, int r, std::vector<T> &hulp) {
     int hl = l;
     int hm = m;
     while (hl < m && hm < r) {
-        int kleinste = -1;
+        int kleinste_index = -1;
         if (vector[hm] < vector[hl]) {
-            kleinste = vector[hm];
-            hm++; // verschuif hm
+            kleinste_index = hm;
+            hm++;  // verschuif hm
         } else {
-            kleinste = vector[hl];
-            hl++; // verschuif hl
+            kleinste_index = hl;
+            hl++;  // verschuif hl
         }
-        hulp[k] = kleinste;
+        hulp[k] = move(vector[kleinste_index]);
         k++;
     }
 
     // Ontbrekende zaken toevoegen
     while (hl < m) {
-        hulp[k] = vector[hl];
+        hulp[k] = move(vector[hl]);
         hl++;
         k++;
     }
     while (hm < r) {
-        hulp[k] = vector[hm];
+        hulp[k] = move(vector[hm]);
         hm++;
         k++;
     }
 
     // Hulparray op de juiste plaats in de originele vector steken
     for (int i = 0; i < k; i++) {
-        vector[l + i] = hulp[i];
+        vector[l + i] = move(hulp[i]);
     }
 }
 
@@ -87,15 +90,15 @@ void merge_sort(vector<T> &vector, int l, int r, std::vector<T> &hulp) {
 
 template <class T>
 void merge_sort(vector<T> &vector) {
-    // De hulpvector kan je in elke stap hergebruiken en is maximaal de helft zo groot als de
-    // originele array
+    // De hulpvector kan je in elke stap hergebruiken en is maximaal de helft zo
+    // groot als de originele array
     std::vector<T> h(vector.size() / 2);      // Hulpvector
     merge_sort(vector, 0, vector.size(), h);  // Andere functie aanroepen
 }
 
 int main() {
     cout << "Before sorting: " << endl;
-    std::vector<int> vector{38,27,43,3,9,82,10};
+    std::vector<int> vector{5, 4, 3, 2, 1, 0};
     print_vector(vector);
 
     cout << endl;
