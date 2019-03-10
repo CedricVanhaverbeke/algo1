@@ -14,7 +14,38 @@ void print_vector(vector<T> &vector) {
 }
 
 /*
-    ALS PIVOT LINKS IS:
+    Mediaan berekenen van 3 elmenten
+    bereken de mediaan door het grootste element te nemen en het kleinste en dat
+   dan af te trekken van de totale som Aangezien het maar om 3 elementen gaat,
+   is dat best snel.
+*/
+
+template <class T>
+int getIndexOfMedianOfThreeValues(vector<T> &vector, int l, int r) {
+    int a = vector[l], c = vector[r - l - 1], b = vector[(r - l) / 2];
+
+    int index;
+
+    // b is mediaan
+    if ((a < b && b < c) || (c < b && a < c)) {
+        index = (r - l) / 2;
+
+        // a is mediaan
+    } else if ((b < a && a < c) || (c < a && a < b)) {
+        index = l;
+
+        // c is mediaan
+    } else {
+        // For some reason werkt het algoritme niet
+        // met waarden in de array die helemaal rechts staan
+        // Daarom doe ik het met de voorlaatste
+        index = r - l - 1;
+    }
+
+    return index;
+}
+
+/*
 
     STAP 1: variabelen klaarzetten
     pivot = element links ervan moeten kleiner worden, rechts ervan groter
