@@ -83,9 +83,11 @@ void MergeSort<T>::merge(vector<T>& v, int l, int m, int r,
 
 template <class T>
 int MergeSort<T>::berekeInversies(vector<T>& v) {
+    // Gebruik de copy constructor van vector zodat v niet aangepast wordt
+    vector<T> copy(v);
     vector<T> hulp(v.size());
     int aantalInversies = 0;
-    return berekenInversies(v, 0, v.size(), hulp, aantalInversies);
+    return berekenInversies(copy, 0, v.size(), hulp, aantalInversies);
 }
 
 template <class T>
