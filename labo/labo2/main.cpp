@@ -45,12 +45,26 @@ int main() {
     cout << vector4 << endl << endl;
 
     // Inversies tellen
-    cout << "Aantal inversies in een volledig omgekeerde array van 8 elementen"
-         << endl;
-    Sortvector<int> vector5{8};
+    int arrayGrootte = 10000;
+    cout << "Aantal inversies in een volledig omgekeerde array van "
+         << arrayGrootte << "elementen" << endl;
+    Chrono chrono;
+    Sortvector<int> vector5{arrayGrootte};
     vector5.vul_omgekeerd();
+    chrono.start();
     cout << vector5.geefaantalinversieskwadratisch() << endl;
+    chrono.stop();
+    double kwadratisch = chrono.tijd();
+
+    chrono.start();
     cout << mergeSort.berekeInversies(vector5) << endl;
+    chrono.stop();
+    double nlogn = chrono.tijd();
+
+    cout << endl << "Tijdvergelijking\n";
+
+    cout << setw(20) << "kwadratisch " << setw(20) << kwadratisch << endl
+         << setw(20) << "nlogn " << setw(20) << nlogn << endl;
 
     return 0;
 }

@@ -81,7 +81,9 @@ template <class T>
 void merge_sort(vector<T> &vector, int l, int r, std::vector<T> &hulp) {
     // Als l kleiner is dan r
     if (l < r - 1) {
-        int m = l + (r - l) / 2;  // Veiliger dan (l+r) / 2. Bepaalt het midden
+        // Veiliger dan (l+r) / 2. Bepaalt het midden,
+        // r-l is de grootte van de array
+        int m = l + (r - l) / 2;
         merge_sort(vector, l, m, hulp);  // Links deel
         merge_sort(vector, m, r, hulp);  // Rechts deel
         merge(vector, l, m, r, hulp);    // Samenvoegen met hulpvector
@@ -90,9 +92,8 @@ void merge_sort(vector<T> &vector, int l, int r, std::vector<T> &hulp) {
 
 template <class T>
 void merge_sort(vector<T> &vector) {
-    // De hulpvector kan je in elke stap hergebruiken en is maximaal de helft zo
-    // groot als de originele array
-    std::vector<T> h(vector.size() / 2);      // Hulpvector
+    // De mergefunctie zoals ik hem heb geschreven maakt gebruik
+    std::vector<T> h(vector.size());          // Hulpvector
     merge_sort(vector, 0, vector.size(), h);  // Andere functie aanroepen
 }
 
