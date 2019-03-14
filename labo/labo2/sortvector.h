@@ -44,6 +44,12 @@ class Sortvector : public vector<T> {
     /// vul_range(), d.w.z. dat, voor alle i, (*this)[i]==T(i);
     bool is_range() const;
 
+    // Aantal inversies berekenen
+    int geefaantalinversieskwadratisch() const;
+
+    // Aantal inversies berkenen met mergesort
+    int geefaantalinversiesMetMergesort() const;
+
     friend ostream& operator<<(ostream& os, const Sortvector<T>& s) {
         s.schrijf(os);
         return os;

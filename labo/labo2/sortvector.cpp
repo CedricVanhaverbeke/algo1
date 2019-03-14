@@ -1,4 +1,5 @@
 #include "sortvector.h"
+#include "sorteermethode.h"
 
 template <class T>
 void Sortvector<T>::vul_random_zonder_dubbels() {
@@ -85,4 +86,17 @@ bool Sortvector<T>::is_range() const {
         }
     }
     return gesorteerd;
+}
+
+template <class T>
+int Sortvector<T>::geefaantalinversieskwadratisch() const {
+    int aantalInversies = 0;
+    for (int i = 0; i < this->size(); i++) {
+        for (int j = i + 1; j < this->size(); j++) {
+            if (this->operator[](i) > this->operator[](j)) {
+                aantalInversies++;
+            }
+        }
+    }
+    return aantalInversies;
 }

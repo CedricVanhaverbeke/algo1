@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "istring.h"
-#include "sorteermethode.h"
+#include "sorteermethode.cpp"
 using namespace std;
 
 int main() {
@@ -40,10 +40,17 @@ int main() {
     // Mergesort testen
     Sortvector<int> vector4{6};
     vector4.vul_omgekeerd();
-
     MergeSort<int> mergeSort;
     mergeSort(vector4);
-    cout << vector4;
+    cout << vector4 << endl << endl;
+
+    // Inversies tellen
+    cout << "Aantal inversies in een volledig omgekeerde array van 8 elementen"
+         << endl;
+    Sortvector<int> vector5{8};
+    vector5.vul_omgekeerd();
+    cout << vector5.geefaantalinversieskwadratisch() << endl;
+    cout << mergeSort.berekeInversies(vector5) << endl;
 
     return 0;
 }
