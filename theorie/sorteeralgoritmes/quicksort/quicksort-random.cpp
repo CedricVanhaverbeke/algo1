@@ -94,7 +94,7 @@ ostream &operator<<(ostream &os, vector<T> &v) {
 int getRandomPivotIndex(int l, int r) {
     int length = r - l;
 
-    int pivot_index = l + rand() % (length + 1);
+    int pivot_index = l + rand() % length;
 
     return pivot_index;
 }
