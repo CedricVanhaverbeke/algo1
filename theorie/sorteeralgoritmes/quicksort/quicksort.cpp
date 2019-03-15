@@ -33,7 +33,6 @@ void print_vector(vector<T> &vector) {
 template <typename T>
 void quick_sort(vector<T> &vector, int l, int r) {
     if (l < r - 1) {
-        // Partition with the median of 3 as pivot
         T pivot = vector[l];
         int hl = l, hr = r - 1;
 
