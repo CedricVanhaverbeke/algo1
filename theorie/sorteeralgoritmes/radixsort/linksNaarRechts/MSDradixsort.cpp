@@ -12,6 +12,11 @@ using std::vector;
 template <class T>
 ostream& operator<<(ostream& os, vector<T>& v);
 
+// Hier halen we uit een getal bv 5679 een cijfer van een bepaalde index
+// met een radix.
+// radix is meestal 10, toch hier wel
+// dus getNumberAtIndex(5679, 3, 10) = 6
+// en getNumberAtIndex(5679, 4, 10) = 5
 int getNumberAtIndex(int totaalNummer, int index, int radix) {
     return int(totaalNummer / pow(radix, index - 1)) % radix;
 }
@@ -108,9 +113,9 @@ void radixsort(vector<int>& v, int m) {
     // Help vector
     vector<int> help(v.size(), 0);
 
-    // Do counting sort for every digit. Note that instead
-    // of passing digit number, exp is passed. exp is 10^i
-    // where i is current digit number
+    // Pas nu countingsort toe voor een bepaald
+    // getal in het cijfer. We beginnen logischerwijs
+    // op de grootste exponent, namelijk max.
     countSort(v, max, 10, 0, v.size(), help);
 }
 
