@@ -44,6 +44,8 @@ int getNumberAtIndex(int totaalNummer, int index, int radix) {
     In het midden staat er nu echter meer dan 1 getal, want ja, je sorteert
    slechts op 1 cijfer. Vandaar dat ik die grenzen bepaal met i & j. Wellicht
    kan het sneller, maar deze methode werkt wel
+
+   Daarna werk je recursief op de drie delen
 */
 void ternaireRadixQuicksort(vector<int>& v, int exp, int l, int r) {
     if (r - l > 1 && exp > 0) {
@@ -93,10 +95,11 @@ void ternaireRadixQuicksort(vector<int>& v, int exp, int l, int r) {
 
 int main() {
     vector<int> v = {466, 308, 228, 221, 537, 551, 433, 422, 437, 825};
+    cout << v;
     int exp = 3;
     int teller = 0;
     ternaireRadixQuicksort(v, 3, 0, v.size());
-    cout << v;
+    cout << "Vector na sorteren" << endl << v;
 
     return 0;
 }
