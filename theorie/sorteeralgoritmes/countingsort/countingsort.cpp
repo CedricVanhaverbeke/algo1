@@ -24,15 +24,8 @@ void print_array(int* tabel, int size) {
 // l = linkergrens interval
 // r = rechtergrens interval
 void countingsort(vector<int>& v, int l, int r) {
-    // Omdat we de frequentietabel niet meer nodig gaan hebben
-    // moeten we ze free'en op het einde van de methode
-    int* frequentietabel =
-        new int[r - l + 1];  // frequentietabel moet 1 groter zijn dan r - l
-
-    // Alle waarden van de frequentietabel op 0 instellen
-    for (int i = 0; i < r - l + 1; i++) {
-        frequentietabel[i] = 0;
-    }
+    // frequentietabel aanmaken
+    vector<int> frequentietabel(r - l + 1, 0);
 
     for (int i = 0; i < v.size(); i++) {
         // vb: 5 - 5 ==> 5 komt op 0 terecht in de frequentietabel
@@ -40,8 +33,8 @@ void countingsort(vector<int>& v, int l, int r) {
     }
 
     cout << "Bijhorende frequentietabel: " << endl;
-    print_array(frequentietabel, r - l + 1);
-    cout << endl << endl;
+
+    cout << frequentietabel << endl << endl;
 
     cout << "\n";
 
@@ -72,8 +65,6 @@ void countingsort(vector<int>& v, int l, int r) {
 
     v = sortedVector;
     */
-
-    free(frequentietabel);
 }
 
 int main() {
