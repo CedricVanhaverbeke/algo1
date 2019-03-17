@@ -21,28 +21,28 @@ void print_vector(vector<T> &vector) {
 */
 
 template <class T>
-int getIndexOfMedianOfThreeValues(vector<T> &vector, int l, int r) {
-    int a = vector[l], c = vector[r - l - 1], b = vector[(r - l) / 2];
+T getIndexOfMedianOfThreeValues(vector<T> &vector, int l, int r) {
+    int a = vector[l], b = vector[l+ (r - l) / 2], c = vector[r - l - 1];
 
-    int index;
+    int mediaan;
 
     // b is mediaan
     if ((a < b && b < c) || (c < b && a < c)) {
-        index = (r - l) / 2;
+        mediaan = b;
 
         // a is mediaan
     } else if ((b < a && a < c) || (c < a && a < b)) {
-        index = l;
+        mediaan = a;
 
         // c is mediaan
     } else {
         // For some reason werkt het algoritme niet
         // met waarden in de array die helemaal rechts staan
         // Daarom doe ik het met de voorlaatste
-        index = r - l - 1;
+        mediaan = c;
     }
 
-    return index;
+    return (mediaan);
 }
 
 /*
@@ -63,9 +63,8 @@ int getIndexOfMedianOfThreeValues(vector<T> &vector, int l, int r) {
 
 template <typename T>
 void quick_sort(vector<T> &vector, int l, int r) {
-    if (l < r - 1) {
-        // Partition with the median of 3 as pivot
-        T pivot = vector[l];
+    if (r - l > 1) {
+        T pivot = getIndexOfMedianOfThreeValues(vector, l, r);
         int hl = l, hr = r - 1;
 
         while (vector[hr] > pivot) {

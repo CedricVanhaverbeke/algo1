@@ -5,12 +5,13 @@
 
 using namespace std;
 
-template <class T>
-void print_vector(vector<T> &vector) {
-    for (auto t : vector) {
-        cout << t << " ";
+template <typename T>
+ostream& operator<<(ostream& os, vector<T>& v) {
+    for (int i = 0; i < v.size(); i++) {
+        os << v[i] << " ";
     }
-    cout << endl;
+    os << endl;
+    return os;
 }
 
 /*
@@ -36,17 +37,26 @@ void quick_sort(vector<T> &vector, int l, int r) {
         T pivot = vector[l];
         int hl = l, hr = r - 1;
 
+        // Dit is om ervoor te zorgen dat we zowel
+        // l kunnen kiezen als begin als r
+
+        // Vinden van een waarde kleiner dan de pivot achteraan
         while (vector[hr] > pivot) {
             hr--;
         }
+
+        // Vinden van een waarde groter dan de pivot vooraan
         while (vector[hl] < pivot) {
             hl++;
         }
+
+        // Hier beginnen we effectief te sorteren
         while (hl < hr) {
             swap(vector[hl], vector[hr]);
             hl++;
             hr--;
 
+            // Hier weer hetzelfde doen als ervoor
             while (vector[hl] < pivot) {
                 hl++;
             }
@@ -55,7 +65,7 @@ void quick_sort(vector<T> &vector, int l, int r) {
             }
         }
 
-        // sort both subvectors recursively
+        // Recursief alles sorteren
         quick_sort(vector, l, hr + 1);
         quick_sort(vector, hr + 1, r);
     }
@@ -69,13 +79,11 @@ void quick_sort(vector<T> &vector) {
 int main() {
     srand(time(NULL));
     cout << "Before sorting: " << endl;
-    std::vector<int> vector{10, 38, 27, 43, 3, 9, 82};
-    print_vector(vector);
-
-    cout << endl;
+    std::vector<int> vector{10, 38, 27, 43, 3, 9, 82, 9,};
+    cout << vector;
 
     cout << "After sorting: " << endl;
     quick_sort(vector);
-    print_vector(vector);
+    cout << vector;
     return 0;
 }

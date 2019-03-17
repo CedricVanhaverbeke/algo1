@@ -15,7 +15,7 @@ using namespace std;
     dit reduceren naar O(nlogn)
 */
 template <class T>
-vector<T> &selection_sort_zonder_heap(vector<T> &vector) {
+void selection_sort(vector<T>& vector) {
     for (int i = vector.size() - 1; i >= 0; i--) {
         // Het maximum zoeken van de array adhv de plaats
         // Dit is de naïeve methode
@@ -27,26 +27,22 @@ vector<T> &selection_sort_zonder_heap(vector<T> &vector) {
         }
         swap(vector[i], vector[max]);
     }
-    return vector;
 }
 
 template <class T>
-void print_vector(vector<T> &vector) {
-    for (auto t : vector) {
-        cout << t << " ";
+ostream& operator<<(ostream& os, vector<T>& v) {
+    for (int i = 0; i < v.size(); i++) {
+        os << v[i] << " ";
     }
-    cout << endl;
+    os << endl;
+    return os;
 }
 
 int main() {
     cout << "Before sorting: " << endl;
     vector<int> vector{4, 8, 9, 10, 7, 1, 9, 12, 3, 6};
-    print_vector(vector);
-
-    cout << endl;
-
-    cout << "After sorting: " << endl;
-    vector = selection_sort_zonder_heap(vector);
-    print_vector(vector);
+    cout << vector;
+    selection_sort(vector);
+    cout << "Na sorteren\n" << vector;
     return 0;
 }

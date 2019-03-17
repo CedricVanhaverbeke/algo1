@@ -38,33 +38,22 @@ void countingsort(vector<int>& v, int l, int r) {
 
     cout << "\n";
 
-    // zonder hulpvector: van achter naar voor werken
-    int i = v.size();  // i is de index van de originele vector
-    int getal = r;     // het in te vullen getal is r in het begin
-    while (i >= 0) {
-        // We halen op hoeveel keer we het // getal moeten schrijven
-        int aantalKeer = frequentietabel[getal - l];
+    // van achter naar voor werken.
+    // in i houden we de index bij van de vector die moet gesorteerd worden
+    int i = v.size() - 1; 
 
-        // Hier schrijven we het getal zoveel keer uit
-        for (int j = aantalKeer; j > 0; j--) {
+    // het in te vullen getal is r = rechtergrens in het begin
+    int getal = r;     
+    while (i >= 0) {
+        // Hier schrijven we het getal het aantal keer uit
+        // dat het in de frequentietabel staat
+        // let op de -l zodat we zeker op de juiste index zitten
+        for (int j = 0; j < frequentietabel[getal - l]; j++) {
             v[i] = getal;
             i--;
         }
-
-        // Nu mag het getal verminderen.
-        getal--;
+        getal--;     // Nu mag het getal verminderen.
     }
-
-    // Met hulpvector
-    /*vector<int> sortedVector;
-    for (int i = 0; i < r - l + 1; i++) {
-        for (int j = 0; j < frequentietabel[i]; j++) {
-            sortedVector.push_back(i + l);  // l er terug bij optellen
-        }
-    }
-
-    v = sortedVector;
-    */
 }
 
 int main() {

@@ -9,23 +9,27 @@ using namespace std;
    goed andere stappen zijn
 */
 template <class T>
-void shell_sort(vector<T>& v) {
-    int k = v.size() / 2;  // initieel increment
+void shell_sort(vector<T>& vector) {
+    int k = vector.size() / 2;  // initieel increment
 
-    while (k >= 1) {  // k mag maximaal 1 worden
+    while (k >= 1) {
+        /*
+            Dit is het insertion sort deel. In plaats van
+            het met adjacente waarden in de array te doen
+            doen we dat nu met k plaatsen tussen. Deze
+            sorteert dus de deelarray met k plaatsen tussen
+        */
+        for (int i = k; i < vector.size(); i += k) {  // stappen van k
+            T temp = move(vector[i]);
+            int j = i - k;  // ipv i - 1 zoals bij insertion, -k
 
-        // insertion sort
-        for (int i = 0; i < v.size(); i += k) {
-            T h = move(v[i]);
-            int j = i - k;  // de waarde voor i
-            while (j >= 0 && v[j] > h) {
-                v[j + k] = move(v[j]);
+            while (j >= 0 && vector[j] > temp) {
+                vector[j + k] = move(vector[j]);
                 j -= k;
             }
-            v[j + k] = move(h);  // waarde op de juiste plaats zetten
+            vector[j + k] = move(temp);
         }
-
-        k /= 2;
+        k = k / 2;  // Hier verkleinen we k
     }
 }
 

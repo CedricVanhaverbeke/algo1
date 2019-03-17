@@ -2,7 +2,7 @@
 #include "stijgendeHeap.cpp"
 
 template <class T>
-void selection_sort_met_heap(vector<T> &vector) {
+void heap_sort(vector<T> &vector) {
     // Maken van de heap adhv de vector
     Heap heap(vector);
     int i = 0;
@@ -23,7 +23,7 @@ void print_vector(vector<T> &vector) {
 int main() {
     vector<int> v = {5, 10, 3, 7, 8, 9, 69, 73, 54, 29};
     print_vector(v);
-    selection_sort_met_heap(v);
+    heap_sort(v);
     print_vector(v);
     return 0;
 }
