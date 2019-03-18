@@ -41,22 +41,11 @@ Lijst& operator=(Lijstknoopptr<T>&&);
 // Implementatie
 template <class T>
 Lijst<T>& Lijst<T>::operator=(Lijstknoopptr<T>&& other) {
-    // Not sure wat deze lijn doet
-    // Je roept de move operator op van lijstknoopptr, wat gewoon een unique
-    // pointer is, en dan doe je nog eens die move, maar waarom moet dat?
-    // Je zou verwachten dat je gewoon other kan schrijven vind ik.
-    // Dat gaat dus niet. Waarom move(other) ? Omdat je een && meekrijgt?
+    // Deze methode gaat de move operator oproepen van
+    // de klasse Lijstknoopptr. Je erft ervan over
+    // daarom kan je daaraan.
     Lijstknoopptr<T>::operator=(move(other));
     return *this;
-}
-
-// Implementatie 2
-// volgende implementatie werkt even goed
-// en is iets intuïtiever
-template <class T>
-Lijst<T>& Lijst<T>::operator=(Lijstknoopptr<T>&& other) {
-            (*this) = move(other);
-            return (*this);
 }
 ```
 
@@ -133,6 +122,14 @@ Lijst();
 // In implementatiefile
 template <class T>
 Lijst<T>::Lijst() : Lijstknoopptr<T>(){};
+```
+
+Omdat we eigenlijk gewoon de superklasse aanspreken weet C++ hier wel raad mee. Daarom volstaat om gewoon de default constructor te gebruiken
+
+```c++
+//declaratie
+// default constructor
+Lijst() = default;
 ```
 
 ## Stap 5: Move operator / Move constructor
