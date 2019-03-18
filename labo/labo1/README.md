@@ -35,13 +35,35 @@ In de oplossing zie je Demian zijn uitgebreide uitleg hiervan
 Dit ziet er zo uit:
 
 ```c++
-// Move operator in de header
+// move operator declaratie
 Lijst& operator=(Lijstknoopptr<T>&&);
 
-// Dit voert gewoon de move operator uit van een lijstknoopptr op other.
-move(other) slaat erop dat hij het adres moet moven, en niet kopïeren.
-Lijstknoopptr<T>::operator=(move(other));
-return *this;
+// Implementatie
+template <class T>
+Lijst<T>& Lijst<T>::operator=(Lijstknoopptr<T>&& other) {
+    // Not sure wat deze lijn doet
+    // Je roept de move operator op van lijstknoopptr, wat gewoon een unique
+    // pointer is, en dan doe je nog eens die move, maar waarom moet dat?
+    // Je zou verwachten dat je gewoon other kan schrijven vind ik.
+    // Dat gaat dus niet. Waarom move(other) ? Omdat je een && meekrijgt?
+    Lijstknoopptr<T>::operator=(move(other));
+    return *this;
+
+    /*
+        Dit werk even goed:
+            (*this) = move(other);
+            return (*this);
+    */
+}
+
+// Implementatie 2
+// volgende implementatie werkt even goed
+// en is iets intuïtiever
+template <class T>
+Lijst<T>& Lijst<T>::operator=(Lijstknoopptr<T>&& other) {
+            (*this) = move(other);
+            return (*this);
+}
 ```
 
 ## Stap 2: Assignment operator
