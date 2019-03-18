@@ -48,12 +48,6 @@ Lijst<T>& Lijst<T>::operator=(Lijstknoopptr<T>&& other) {
     // Dat gaat dus niet. Waarom move(other) ? Omdat je een && meekrijgt?
     Lijstknoopptr<T>::operator=(move(other));
     return *this;
-
-    /*
-        Dit werk even goed:
-            (*this) = move(other);
-            return (*this);
-    */
 }
 
 // Implementatie 2
