@@ -292,3 +292,21 @@ typename Lijst<T>::iterator Lijst<T>::end() const {
 
 - voor wat staat de typename bij begin() en end()
 - Waarom is bevat de iterator niet gewoon lijstpointers? Nu bevat hij gewoon een int en moet je een huidige knoop bijhouden om het boeltje te doen werken
+
+### Eindremarks labo
+
+We hebben nu een aantal constructoren geschreven die eigenlijk letterlijk doen wat de superklasse doet. Daarom is het ook perfect mogelijk om gewoon dit te schrijven
+
+```cpp
+    // Move operator met een lijst
+    Lijst& operator=(Lijst&&) = default;
+
+    // Move constructor
+    Lijst(Lijst&&) = default;
+
+    // Default constructor
+    Lijst() = default;
+```
+
+Zelfs de copyconstructor werkt als we hem zo implementeren. Dat komt echter omdat we hem in ons testprogramma niet gebruiken. Moesten we hem testen, zou C++ er wellicht niet
+mee omkunnen. Daarom zet ik hem niet in het rijtje.

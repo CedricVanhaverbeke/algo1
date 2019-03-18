@@ -74,11 +74,9 @@ Lijst<T>::Lijst() : Lijstknoopptr<T>(){};
 // Move operator met een lijstknoopptr als argument
 template <class T>
 Lijst<T>& Lijst<T>::operator=(Lijstknoopptr<T>&& other) {
-    // Not sure wat deze lijn doet
-    // Je roept de move operator op van lijstknoopptr, wat gewoon een unique
-    // pointer is, en dan doe je nog eens die move, maar waarom moet dat?
-    // Je zou verwachten dat je gewoon other kan schrijven vind ik.
-    // Dat gaat dus niet. Waarom move(other) ? Omdat je een && meekrijgt?
+    // Deze methode gaat de move operator oproepen van
+    // de klasse Lijstknoopptr. Je erft ervan over
+    // daarom kan je daaraan.
     Lijstknoopptr<T>::operator=(move(other));
     return *this;
 }
