@@ -32,7 +32,7 @@ ostream& operator<<(ostream& os, vector<T>& v) {
 */
 
 template <typename T>
-void quick_sort(vector<T> &vector, int l, int r) {
+void quick_sort(vector<T>& vector, int l, int r) {
     if (l < r - 1) {
         T pivot = vector[l];
         int hl = l, hr = r - 1;
@@ -72,14 +72,16 @@ void quick_sort(vector<T> &vector, int l, int r) {
 }
 
 template <class T>
-void quick_sort(vector<T> &vector) {
+void quick_sort(vector<T>& vector) {
     quick_sort(vector, 0, vector.size());
 }
 
 int main() {
     srand(time(NULL));
     cout << "Before sorting: " << endl;
-    std::vector<int> vector{10, 38, 27, 43, 3, 9, 82, 9,};
+    std::vector<int> vector{
+        10, 38, 27, 43, 3, 9, 82, 9,
+    };
     cout << vector;
 
     cout << "After sorting: " << endl;

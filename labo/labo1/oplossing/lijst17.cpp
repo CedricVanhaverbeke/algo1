@@ -7,9 +7,13 @@
 // Een copy constructor returnt ook niets
 template <class T>
 Lijst<T>::Lijst(const Lijst<T>& other) {
-    auto tmp = std::make_unique<Lijstknoop<T>>(other->sleutel);
-    (*this) = std::move(tmp);
-    this->get()->volgend = other->volgend;
+    if (other.get() != nullptr) {
+        auto tmp = std::make_unique<Lijstknoop<T>>(other->sleutel);
+        (*this) = std::move(tmp);
+        this->get()->volgend = other->volgend;
+    } else {
+        (*this) = nullptr;
+    }
 }
 
 // Move constructor met een lijst

@@ -26,7 +26,7 @@ int vindCyclischBegin(vector<T>& v) {
 
 int main(int argc, char** argv) {
     // v is nu cyclisch
-    vector<int> v{6, 7, 8, 9, 10, 0, 1, 2, 3, 4, 5};
+    vector<int> v{6, 7, 8, 9, 10, 1, 2, 3, 4, 5};
     int index = vindCyclischBegin(v);
     cout << "Cyclisch begin is op index " << index
          << " met als waarde: " << v[index] << endl;

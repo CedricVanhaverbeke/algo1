@@ -21,28 +21,28 @@ void print_vector(vector<T> &vector) {
 */
 
 template <class T>
-T getIndexOfMedianOfThreeValues(vector<T> &vector, int l, int r) {
-    int a = vector[l], b = vector[l+ (r - l) / 2], c = vector[r - l - 1];
+int getIndexOfMedianOfThreeValues(vector<T> &vector, int l, int r) {
+    int a = vector[l], b = vector[(r - l) / 2], c = vector[r - 1];
 
-    int mediaan;
+    int index;
 
     // b is mediaan
     if ((a < b && b < c) || (c < b && a < c)) {
-        mediaan = b;
+        index = l + (r - l) / 2;
 
         // a is mediaan
     } else if ((b < a && a < c) || (c < a && a < b)) {
-        mediaan = a;
+        index = l;
 
         // c is mediaan
     } else {
         // For some reason werkt het algoritme niet
         // met waarden in de array die helemaal rechts staan
         // Daarom doe ik het met de voorlaatste
-        mediaan = c;
+        index = r - 1;
     }
 
-    return (mediaan);
+    return (index);
 }
 
 /*
@@ -64,13 +64,17 @@ T getIndexOfMedianOfThreeValues(vector<T> &vector, int l, int r) {
 template <typename T>
 void quick_sort(vector<T> &vector, int l, int r) {
     if (r - l > 1) {
-        T pivot = getIndexOfMedianOfThreeValues(vector, l, r);
+        int index = getIndexOfMedianOfThreeValues(vector, l, r);
+
+        // mediaan swappen
+        // swap(vector[index], vector[0]);
+
         int hl = l, hr = r - 1;
 
-        while (vector[hr] > pivot) {
+        while (vector[hr] > vector[index]) {
             hr--;
         }
-        while (vector[hl] < pivot) {
+        while (vector[hl] < vector[index]) {
             hl++;
         }
         while (hl < hr) {
@@ -78,10 +82,10 @@ void quick_sort(vector<T> &vector, int l, int r) {
             hl++;
             hr--;
 
-            while (vector[hl] < pivot) {
+            while (vector[hl] < vector[index]) {
                 hl++;
             }
-            while (vector[hr] > pivot) {
+            while (vector[hr] > vector[index]) {
                 hr--;
             }
         }

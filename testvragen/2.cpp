@@ -22,38 +22,42 @@ ostream& operator<<(ostream& os, vector<T>& v) {
 // Dit doet dus 1 stap van quicksort
 template <class T>
 int vindGesorteerdePlaats(vector<T>& v, int index) {
-    swap(v[index], v[0]);
-    T pivot = move(v[0]);
-    int hl = 0, hr = v.size() - 1;
+    if (v.size() > 1) {
+        swap(v[index], v[0]);
+        T pivot = v[index];
+        int i = 0, j = v.size() - 1;
 
-    while (v[hr] > pivot) {
-        hr--;
-    }
-    while (v[hl] < pivot) {
-        hl++;
-    }
-
-    while (hl < hr) {
-        swap(v[hl], v[hr]);
-        hl++;
-        hr--;
-
-        while (v[hl] < pivot) {
-            hl++;
+        while (v[i] < pivot) {
+            i++;
         }
-        while (v[hr] > pivot) {
-            hr--;
+
+        while (v[j] > pivot) {
+            j--;
+        }
+
+        while (i < j) {
+            swap(v[i], v[j]);
+            i++;
+            j--;
+
+            while (v[i] < pivot) {
+                i++;
+            }
+
+            while (v[j] > pivot) {
+                j--;
+            }
         }
     }
 
-    cout << "hr: " << hr << endl << "hl" << hl << endl << v;
-    return hr;
+    return 0;
 }
 
 int main() {
     vector<int> v{33, 11, 7, 9, 24, 54};
-    int plaats = vindGesorteerdePlaats(v, 0);
+    cout << v;
+    int plaats = vindGesorteerdePlaats(v, 3);
     // cout << "Plaats is " << plaats << endl;
-
+    cout << v;
     return 0;
 }

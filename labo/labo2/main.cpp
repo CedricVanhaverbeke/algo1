@@ -4,6 +4,21 @@
 #include "sorteermethode.cpp"
 using namespace std;
 
+unsigned int lgfloor(long unsigned int teZoeken) {
+    unsigned int i = 1;
+    unsigned int teller = 0;
+
+    if (teZoeken < 2) {
+        return 0;
+    }
+
+    while (i <= teZoeken) {
+        i <<= 1;  // bitshift naar links
+        teller++;
+    }
+    return --teller;
+}
+
 int main() {
     srand(time(NULL));
 
@@ -65,6 +80,8 @@ int main() {
 
     cout << setw(20) << "kwadratisch " << setw(20) << kwadratisch << endl
          << setw(20) << "nlogn " << setw(20) << nlogn << endl;
+
+    cout << endl << lgfloor(255);
 
     return 0;
 }
