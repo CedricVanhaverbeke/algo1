@@ -24,14 +24,16 @@ int main() {
     DiGraph<int> d;
 
     fillDiGraph(10, d);
+
+    cout << "Lijstweergave van de graaf:" << endl;
     cout << d;
     cout << endl << endl;
 
-    cout << "Diepte eerst:" << endl;
+    cout << "Diepte eerst doorlopen:" << endl;
     d.DEPrint(cout);
     cout << endl;
 
-    cout << "Breedte eerst:" << endl;
+    cout << "Breedte eerst doorlopen:" << endl;
     d.BEPrint(cout);
 
     return 0;
