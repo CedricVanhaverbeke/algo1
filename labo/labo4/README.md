@@ -1,4 +1,4 @@
-# Labo 3:
+# Labo 4:
 
 We moeten een bestandsformaat bedenken om een binaire boom uit te schrijven
 en in te lezen.
@@ -79,5 +79,5 @@ volgt de man hier op de berg een vos?
 Als je deze boom in inorder overloopt bekom je het antwoord
 
 ```
-De man volgt hier op de berg een vos.
+de man volgt hier de vos een berg op
 ```
