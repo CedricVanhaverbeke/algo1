@@ -1,0 +1,10 @@
+9
+berg 3 -1
+de -1 0
+de -1 5
+een 7 -1
+volgt 2 8
+man -1 -1
+op 1 -1
+vos -1 -1
+hier -1 6
